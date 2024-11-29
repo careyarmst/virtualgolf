@@ -13,7 +13,7 @@ def customer_create_view(request):
         if form.is_valid():
             form.save()
             return redirect ('customer_list')
-    return render(request, 'golfproapp/customer_create.html', {'form': form})
+    return render(request, 'golfproapp/customer_form.html', {'form': form})
 
 def customer_list_view(request):
     customers = Customer.objects.all()

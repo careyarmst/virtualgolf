@@ -1,1 +1,18 @@
 {% extends "golfproapp/layout.html" %}
+
+<!-- Extend the base layout from the layout.html -->
+
+{% block title %} Customer Form {% endblock %}
+
+{% block content %}
+<h1 class="text-center">Product Form</h1>
+<form method="POST" class="jumbotron">
+    {% csrf_token %}
+    {{form}}
+    <button class="btn btn-success btn-block" type="submit">Save Customer</button>
+    <br>
+    <br>
+    <button class="btn btn-outline-success" type="button">
+    <a href="{% url 'customer_create' %}">Go to Purchases page</a></button>
+</form>
+{% endblock %}
