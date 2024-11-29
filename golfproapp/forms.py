@@ -28,81 +28,43 @@ class CustomerForm(forms.ModelForm):
                 attrs={'placeholder':'e.g. bob@aol.com', 'class':'form-control'}),
         }
 
-class InvOptionsForm(forms.ModelForm):
+class Misc_purchasesForm(forms.ModelForm):
     class Meta:
-        model = inv_options
-        fields = '__all__'
-        labels = {
-            'opt_name': 'Category'
-        }
-        widget = {
-            'opt_name': forms.TextInput(
-                attrs={'placeholder':'e.g. shirt', 'class':'form-control'}),
-        }
-        
-
-class InventoryForm(forms.ModelForm):
-    class Meta:
-        model = inventory
+        model = Misc_purchases
         fields = '__all__'
         labels = {
             'inv_id': 'Inventory ID',
-            'inv_options': 'Category',
             'inv_description' : 'Item Description',
-            'price' : 'Item price'
+            'misc_quantity' : 'Quantity',
+            'misc_price' : 'Price',
+            'misc_subtotal':'Subtotal',
+            'misc_tax': 'Tax',
+            'misc_total': 'Total'
         }
         widget = {
             'inv_id': forms.NumberInput(
                 attrs={'placeholder':'e.g. 1', 'class':'form-control'}),
-            'inv_options': forms.TextInput(
-                attrs={'placeholder':'e.g. shirt', 'class':'form-control'}),
             'inv_description': forms.TextInput(
                 attrs={'placeholder':'e.g. S12345', 'class':'form-control'}),
-            'price': forms.NumberInput(
+            'misc_quantity': forms.NumberInput(
                 attrs={'placeholder':'e.g. 19.99', 'class':'form-control'}),
-
-        }
-
-class OrderForm(forms.ModelForm):
-    class Meta:
-        model = order
-        fields = '__all__'
-        labels = {
-            'products': 'Products in Order',
-            'created_at': 'Order Date'
-        }
-        widget = {
-            'products': forms.TextInput(
-                attrs={'placeholder':'e.g. shirt', 'class':'form-control'}),
-            'created_at': forms.TextInput(
-                attrs={'placeholder':'e.g. S12345', 'class':'form-control'}),
-        }
-
-
-class OrderItemForm(forms.ModelForm):
-    class Meta:
-        model = OrderItem
-        fields = '__all__'
-        labels = {
-            'order': 'Products in Order',
-            'inventory': 'Inventory Data',
-            'quantity': 'Quantity'
-        } 
-        widget = {
-            'order': forms.TextInput(
-                attrs={'placeholder':'e.g. S12345', 'class':'form-control'}),
-            'inventory': forms.NumberInput(
+            'misc_price': forms.NumberInput(
                 attrs={'placeholder':'e.g. 19.99', 'class':'form-control'}),
-            'quantity': forms.NumberInput(
-                attrs={'placeholder':'e.g. 10', 'class':'form-control'}),
+            'misc_subtotal': forms.NumberInput(
+                attrs={'placeholder':'e.g. 19.99', 'class':'form-control'}),
+            'misc_tax': forms.NumberInput(
+                attrs={'placeholder':'e.g. 19.99', 'class':'form-control'}),
+            'misc_total': forms.NumberInput(
+                attrs={'placeholder':'e.g. 19.99', 'class':'form-control'}),
         }
 
-class GolfingForm(forms.ModelForm):
+
+class GolfDataForm(forms.ModelForm):
     class Meta:
-        model = Golfing
+        model = Golf_Data
         fields = '__all__'
         labels = {
-            'customer_id': 'Customer ID',
+            'customer_id': 'Golf Customer ID',
             'tee_time': 'Tee Time',
             'no_in_party': 'Number in Group',
             'avg_grp_hcp': 'Group Average Handicap'
@@ -117,21 +79,37 @@ class GolfingForm(forms.ModelForm):
             'avg_grp_hcp': forms.NumberInput(
                 attrs={'placeholder':'e.g. 19.99', 'class':'form-control'}),
         }
-class PurchaseForm(forms.ModelForm):
+class GolfPurchasesForm(forms.ModelForm):
     class Meta:
-        model = Purchase
+        model = Golf_purchases
         fields = '__all__'
         labels = {
-            'subtotal': 'Subtotal',
-            'tax': 'Tax',
-            'total': 'Total'
+            'customer_id': 'Golf Customer ID',
+            'holes_18_price': '18 Holes Price',
+            'holes_9_price': '9 Holes Price',
+            'cart_9_price': 'Cart fee 9 holes',
+            'cart_18_price': 'Cart fee 18 holes',
+            'golf_subtotal': 'Golf Subtotal',
+            'golf_tax': 'Tax',
+            'golf_total': 'Total'
+
         } 
         widget = {
-          'subtotal': forms.NumberInput(
+            'customer_id': forms.NumberInput(
                 attrs={'placeholder':'e.g. 1', 'class':'form-control'}),
-            'tax': forms.TextInput(
+            'holes_18_price': forms.NumberInput(
                 attrs={'placeholder':'e.g. shirt', 'class':'form-control'}),
-            'total': forms.NumberInput(
+            'holes_9_price': forms.NumberInput(
+                attrs={'placeholder':'e.g. shirt', 'class':'form-control'}),
+            'cart_9_price': forms.NumberInput(
+                attrs={'placeholder':'e.g. shirt', 'class':'form-control'}),
+            'cart_18_price': forms.NumberInput(
+                attrs={'placeholder':'e.g. shirt', 'class':'form-control'}),
+            'golf_subtotal': forms.NumberInput(
+                attrs={'placeholder':'e.g. S12345', 'class':'form-control'}),
+            'golf_tax': forms.NumberInput(
+                attrs={'placeholder':'e.g. S12345', 'class':'form-control'}),
+            'golf_total': forms.NumberInput(
                 attrs={'placeholder':'e.g. S12345', 'class':'form-control'}),
   
         }

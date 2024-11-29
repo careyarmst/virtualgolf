@@ -20,42 +20,37 @@ class Customer(models.Model):
 def __str__(self):
     return self.customer_id
 
-class inv_options(models.Model):
-    opt_name = models.CharField(default="Tees", max_length=50)
-
-def __str__(self):  
-    return self.opt_name
-
-class inventory(models.Model):
+class Misc_purchases(models.Model):
     inv_id = models.IntegerField(default=1)
-    inv_options = models.ForeignKey(inv_options, on_delete=models.CASCADE)
     inv_description = models.CharField(default="Hat",max_length=255)
-    price = models.DecimalField(default=0.00, max_digits=10, decimal_places=2)
+    misc_quantity = models.IntegerField(default=1)
+    misc_price = models.DecimalField(default=0.00, max_digits=10, decimal_places=2)
+    misc_subtotal = models.DecimalField(default=0.00, max_digits=10, decimal_places=2)
+    misc_tax=models.DecimalField(default=.05, max_digits=10, decimal_places=2)
+    misc_total=models.DecimalField(default=.05, max_digits=10, decimal_places=2)
 
 def __str__(self):
     return self.inv_id
 
-class order(models.Model):
-    products = models.ManyToManyField(inventory, through="OrderItem")
-    created_at = models.DateTimeField(auto_now_add=True)
-
-def __str__(self):
-    return self.products
-
-class OrderItem(models.Model):
-    order = models.ForeignKey(order, on_delete=models.CASCADE)
-    inventory = models.ForeignKey(inventory, on_delete=models.CASCADE)
-    quantity = models.PositiveIntegerField(default=1)
-
-
-class Golfing(models.Model):
+class Golf_Data(models.Model):
     customer_id = models.ForeignKey(Customer, on_delete=models.CASCADE)
     tee_time = models.DateTimeField(default=datetime.datetime(2024,11,24,23,59,59))
     no_in_party = models.PositiveIntegerField(default=4)
     avg_grp_hcp = models.PositiveIntegerField(default=26)
-                                    
-class Purchase(models.Model):
-    subtotal = models.DecimalField(decimal_places=2, max_digits=10, default=0.00)
-    tax = models.DecimalField(decimal_places=2, max_digits=2, default=.05)
-    total = models.DecimalField(decimal_places=2, max_digits=10, default=0.00)
 
+def __str__(self):
+    return self.customer_id
+
+
+class Golf_purchases(models.Model):
+    customer_id = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    holes_18_price = models.DecimalField(default=35.00, max_digits=10, decimal_places=2)
+    holes_9_price = models.DecimalField(default=20.00, max_digits=10, decimal_places=2)
+    cart_9_price = models.DecimalField(default=9.00, max_digits=10, decimal_places=2)
+    cart_18_price = models.DecimalField(default=12.00, max_digits=10, decimal_places=2)
+    golf_subtotal = models.DecimalField(default=0.00, max_digits=10, decimal_places=2)
+    golf_tax=models.DecimalField(default=.05, max_digits=10, decimal_places=2)
+    golf_total=models.DecimalField(default=.05, max_digits=10, decimal_places=2)
+
+def __str__(self):
+    return self.customer_id
