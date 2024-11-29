@@ -1,0 +1,38 @@
+{% extends "golfproapp/layout.html" %}
+
+<!-- Extend the base layout from the layout.html -->
+
+{% block title %} Customer List {% endblock %}
+
+{% block content %}
+    <h1 class="text-center">Customers</h1>
+    <table class="table table-bordered table-striped ">
+        <thead class="thead-dark">
+            <tr>
+                <th>Customer ID</th>
+                <th>Golfer</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Phone Number</th>
+                <th>Email</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for customer in customers %}
+            <tr>
+                <td>{{ customer.customer_id }} </td>
+                <td>{{ customer.is_golfer }} </td>
+                <td>{{ customer.fname }} </td>
+                <td>{{ customer.lname }} </td>
+                <td>{{ customer.g_phone }} </td>
+                <td>{{ customer.g_email }} </td>
+                <td> 
+                    <a href="{% url 'customer_update' customer.customer_id %}" class="btn btn-warning" >Update</a>
+                    <a href="{% url 'customer_delete' customer.customer_id %}" class="btn btn-danger" >Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
