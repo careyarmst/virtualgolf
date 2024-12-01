@@ -1,5 +1,5 @@
 from django import forms
-from .models import *
+from .models import Customer, Golf_purchases, Misc_purchases, Golf_Data
 
 class CustomerForm(forms.ModelForm):
     class Meta:
@@ -29,7 +29,7 @@ class CustomerForm(forms.ModelForm):
         }
 
 class Misc_purchasesForm(forms.ModelForm):
-    class Meta:
+    class Meta: 
         model = Misc_purchases
         fields = '__all__'
         labels = {
@@ -84,7 +84,7 @@ class GolfPurchasesForm(forms.ModelForm):
         model = Golf_purchases
         fields = '__all__'
         labels = {
-            'customer_id': 'Golf Customer ID',
+            'customer_id': 'customer_id',
             'purchase_id':'Golf Purchase ID',
             'holes_18_price': '18 Holes Price',
             'holes_9_price': '9 Holes Price',
