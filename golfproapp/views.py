@@ -35,3 +35,34 @@ def customer_delete_view(request, customer_id):
         customer.delete()
         return redirect('customer_list')
     return render(request, 'golfproapp/cust_confirm_del.html', {'customer' : customer})
+
+def golf_purchases_create_view(request):
+    form = GolfPurchasesForm()
+    if request.method == 'POST':
+        form = GolfPurchasesForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect ('golf_purchases_list')
+    return render(request, 'golfproapp/golf_purchases_form.html', {'form': form})
+
+def golf_purchases_list_view(request):
+    Golf_purchase = Golf_purchases.objects.all()
+    return render(request,'golfproapp/golf_purchases_list.html', {'Golf_purchase': Golf_purchase})
+
+def golf_purchases_update_view(request, purchase_id):
+    Golf_purchase = Golf_purchases.objects.get(purchase_id=purchase_id)
+    form = GolfPurchasesForm(instance=Golf_purchase)
+    if request.method == 'POST':
+        form = GolfPurchasesForm(request.POST, instance=Golf_purchase)
+        if form.is_valid():
+            form.save()
+            return redirect ('golf_purchases_list')
+    return render(request, 'golfproapp/golf_purchases_form.html', {'form': form})
+
+def golf_purchases_delete_view(request, purchase_id):
+    Golf_purchase = Golf_purchases.objects.get(purchase_id=purchase_id)
+    if request.method == 'POST':
+        Golf_purchase.delete()
+        return redirect('golf_purchases_list')
+    return render(request, 'golfproapp/purch_confirm_del.html', {'Golf_purchase' : Golf_purchase})
+

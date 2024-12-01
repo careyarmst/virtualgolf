@@ -21,6 +21,7 @@ def __str__(self):
     return self.customer_id
 
 class Misc_purchases(models.Model):
+    customer_id = models.ForeignKey(Customer, default=4, on_delete=models.CASCADE)
     inv_id = models.IntegerField(default=1)
     inv_description = models.CharField(default="Hat",max_length=255)
     misc_quantity = models.IntegerField(default=1)
@@ -33,7 +34,7 @@ def __str__(self):
     return self.inv_id
 
 class Golf_Data(models.Model):
-    customer_id = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    customer_id = models.ForeignKey(Customer, default=4, on_delete=models.CASCADE)
     tee_time = models.DateTimeField(default=datetime.datetime(2024,11,24,23,59,59))
     no_in_party = models.PositiveIntegerField(default=4)
     avg_grp_hcp = models.PositiveIntegerField(default=26)
@@ -43,7 +44,7 @@ def __str__(self):
 
 
 class Golf_purchases(models.Model):
-    customer_id = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    purchase_id = models.IntegerField(default=1)
     holes_18_price = models.DecimalField(default=35.00, max_digits=10, decimal_places=2)
     holes_9_price = models.DecimalField(default=20.00, max_digits=10, decimal_places=2)
     cart_9_price = models.DecimalField(default=9.00, max_digits=10, decimal_places=2)

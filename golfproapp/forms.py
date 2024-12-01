@@ -85,6 +85,7 @@ class GolfPurchasesForm(forms.ModelForm):
         fields = '__all__'
         labels = {
             'customer_id': 'Golf Customer ID',
+            'purchase_id':'Golf Purchase ID',
             'holes_18_price': '18 Holes Price',
             'holes_9_price': '9 Holes Price',
             'cart_9_price': 'Cart fee 9 holes',
@@ -96,6 +97,8 @@ class GolfPurchasesForm(forms.ModelForm):
         } 
         widget = {
             'customer_id': forms.NumberInput(
+                attrs={'placeholder':'e.g. 1', 'class':'form-control'}),
+            'purchase_id': forms.NumberInput(
                 attrs={'placeholder':'e.g. 1', 'class':'form-control'}),
             'holes_18_price': forms.NumberInput(
                 attrs={'placeholder':'e.g. shirt', 'class':'form-control'}),
