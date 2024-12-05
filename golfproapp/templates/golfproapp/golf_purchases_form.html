@@ -1,17 +1,14 @@
 {% extends "golfproapp/layout.html" %}
 
 <!-- Extend the base layout from the layout.html -->
-
-{% block title %} Golf Purchases Form {% endblock %}
+{% block title %} Golf Purchase Form {% endblock %}
 
 {% block content %}
-<h1 class="text-center">Golf Purchases Form</h1>
+<h1 class="text-center">Golf Purchase Form</h1>
 <form method="POST" class="jumbotron">
     {% csrf_token %}
-    {{form}}
-    <button class="btn btn-success btn-block" type="submit">Save Golf Purchase</button>
-    <br>
-    <br>
-    <button class="btn btn-outline-success" type="button">
+    {{ form }}
+    
+    <button class="btn btn-success btn-block" type="submit">Save Purchase</button>
 </form>
 {% endblock %}

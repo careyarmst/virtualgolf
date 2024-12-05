@@ -9,7 +9,7 @@
     <table class="table table-bordered table-striped ">
         <thead class="thead-dark">
             <tr>
-                <th>Golf Customer ID</th>
+                <th>Customer ID</th>
                 <th>Purchase ID</th>
                 <th>18 Holes Cost</th>
                 <th>9 Holes Cost</th>
@@ -19,19 +19,16 @@
             </tr>
         </thead>
         <tbody>
-            {% for golf_purchase in golf_purchases %}
+            {% for golf_purchase in object_list %}
             <tr>
                 <td>{{ golf_purchase.customer_id }} </td>
-                <td>{{ golf_purchase.golf_purchase_id }} </td>
+                <td>{{ golf_purchase.gp_id }} </td>
                 <td>{{ golf_purchase.holes_18_price }} </td>
                 <td>{{ golf_purchase.holes_9_price }} </td>
                 <td>{{ golf_purchase.cart_9_price }} </td>
                 <td>{{ golf_purchase.cart_18_price }} </td>
                 <td>{{ golf_purchase.golf_total }} </td>
-                <td> 
-                    <a href="{% url 'golf_purchase_update' golf_purchase.golf_purchase_id %}" class="btn btn-warning" >Update</a>
-                    <a href="{% url 'golf_purchase_delete' golf_purchase.golf_purchase_id %}" class="btn btn-danger" >Delete</a>
-                </td>
+             
             </tr>
             {% endfor %}
         </tbody>
