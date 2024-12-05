@@ -1,5 +1,6 @@
 from django import forms
 from .models import Customer, Golf_purchases, Misc_purchases, Golf_Data
+import calculation
 
 class CustomerForm(forms.ModelForm):
     class Meta:
@@ -79,40 +80,41 @@ class GolfDataForm(forms.ModelForm):
             'avg_grp_hcp': forms.NumberInput(
                 attrs={'placeholder':'e.g. 19.99', 'class':'form-control'}),
         }
+
 class GolfPurchasesForm(forms.ModelForm):
+    customer_id = forms.ModelChoiceField(queryset=Customer.objects.all())
     class Meta:
         model = Golf_purchases
-        fields = '__all__'
+        fields = ['customer_id', 'gp_id', 'holes_18_price', 'holes_9_price', 'cart_18_price', 'cart_9_price', 'golf_subtotal', 'golf_tax', 'golf_total']
         labels = {
-            'customer_id': 'customer_id',
-            'purchase_id':'Golf Purchase ID',
-            'holes_18_price': '18 Holes Price',
-            'holes_9_price': '9 Holes Price',
-            'cart_9_price': 'Cart fee 9 holes',
-            'cart_18_price': 'Cart fee 18 holes',
+            'gp_id': 'Golf Purchase ID',
+            'holes_18_price' : 'Golf Price (18 Holes)',
+            'holes_9_price' : 'Golf Price (9 Holes)',
+            'cart_18_price': 'Cart Price (18 Holes)',
+            'cart_9_price' : 'Cart Price (9 Holes)',
             'golf_subtotal': 'Golf Subtotal',
-            'golf_tax': 'Tax',
-            'golf_total': 'Total'
+            'golf_tax': 'Golf Tax',
+            'golf_total': 'Golf Total'
 
-        } 
-        widget = {
+        }
+        widgets = {
             'customer_id': forms.NumberInput(
                 attrs={'placeholder':'e.g. 1', 'class':'form-control'}),
-            'purchase_id': forms.NumberInput(
-                attrs={'placeholder':'e.g. 1', 'class':'form-control'}),
+            'gp_id': forms.NumberInput(
+                attrs={'placeholder':'e.g. Yes/No', 'class':'form-control'}),
             'holes_18_price': forms.NumberInput(
-                attrs={'placeholder':'e.g. shirt', 'class':'form-control'}),
+                attrs={'placeholder':'e.g. Bob', 'class':'form-control'}),
             'holes_9_price': forms.NumberInput(
-                attrs={'placeholder':'e.g. shirt', 'class':'form-control'}),
-            'cart_9_price': forms.NumberInput(
-                attrs={'placeholder':'e.g. shirt', 'class':'form-control'}),
+                attrs={'placeholder':'e.g. Smith', 'class':'form-control'}),
             'cart_18_price': forms.NumberInput(
-                attrs={'placeholder':'e.g. shirt', 'class':'form-control'}),
+                attrs={'placeholder':'e.g. 201-331-2412', 'class':'form-control'}),
+            'cart_9_price': forms.NumberInput(
+                attrs={'placeholder':'e.g. bob@aol.com', 'class':'form-control'}),
             'golf_subtotal': forms.NumberInput(
-                attrs={'placeholder':'e.g. S12345', 'class':'form-control'}),
+                attrs={'placeholder':'e.g. bob@aol.com', 'class':'form-control'}),
             'golf_tax': forms.NumberInput(
-                attrs={'placeholder':'e.g. S12345', 'class':'form-control'}),
+                attrs={'placeholder':'e.g. bob@aol.com', 'class':'form-control'}),
             'golf_total': forms.NumberInput(
-                attrs={'placeholder':'e.g. S12345', 'class':'form-control'}),
-  
+                attrs={'placeholder':'e.g. bob@aol.com', 'class':'form-control'}),
         }
+
