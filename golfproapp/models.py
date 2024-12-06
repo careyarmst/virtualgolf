@@ -2,6 +2,7 @@
 from django.db import models
 import datetime
 
+
 # Create your models here.
 
 class Customer(models.Model):
@@ -44,6 +45,7 @@ def __str__(self):
 
 class Golf_Data(models.Model):
     customer_id = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    golf_date = models.DateField(default='2024-11-24')
     tee_time = models.DateTimeField(default=datetime.datetime(2024,11,24,23,59,59))
     no_in_party = models.PositiveIntegerField(default=4)
     avg_grp_hcp = models.PositiveIntegerField(default=26)
@@ -53,7 +55,7 @@ def __str__(self):
 
 class Golf_purchases(models.Model):
     customer_id = models.ForeignKey(Customer, on_delete=models.CASCADE)
-    #gp_date = models.DateTimeField
+    gp_date= models.DateField(default='2024-12-05')
     gp_id = models.IntegerField(default=1, unique=True)
     holes_18_price = models.DecimalField(default=35.00, max_digits=10, decimal_places=2)
     holes_9_price = models.DecimalField(default=20.00, max_digits=10, decimal_places=2)

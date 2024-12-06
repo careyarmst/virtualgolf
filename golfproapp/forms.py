@@ -85,9 +85,10 @@ class GolfPurchasesForm(forms.ModelForm):
     customer_id = forms.ModelChoiceField(queryset=Customer.objects.all())
     class Meta:
         model = Golf_purchases
-        fields = ['customer_id', 'gp_id', 'holes_18_price', 'holes_9_price', 'cart_18_price', 'cart_9_price', 'golf_subtotal', 'golf_tax', 'golf_total']
+        fields = ['customer_id', 'gp_date', 'gp_id', 'holes_18_price', 'holes_9_price', 'cart_18_price', 'cart_9_price', 'golf_subtotal', 'golf_tax', 'golf_total']
         labels = {
             'gp_id': 'Golf Purchase ID',
+            'gp_date': 'Golf Purchase Date',
             'holes_18_price' : 'Golf Price (18 Holes)',
             'holes_9_price' : 'Golf Price (9 Holes)',
             'cart_18_price': 'Cart Price (18 Holes)',
@@ -101,6 +102,8 @@ class GolfPurchasesForm(forms.ModelForm):
             'customer_id': forms.NumberInput(
                 attrs={'placeholder':'e.g. 1', 'class':'form-control'}),
             'gp_id': forms.NumberInput(
+                attrs={'placeholder':'e.g. Yes/No', 'class':'form-control'}),
+            'gp_date': forms.DateInput(
                 attrs={'placeholder':'e.g. Yes/No', 'class':'form-control'}),
             'holes_18_price': forms.NumberInput(
                 attrs={'placeholder':'e.g. Bob', 'class':'form-control'}),

@@ -56,20 +56,20 @@ class golf_purchases_list_view(ListView):
         queryset = super().get_queryset()
         return queryset
     
-def golf_purchases_update_view(request, golf_purchase_id):
-    golf_purchase_id = Golf_purchases.objects.get(golf_purchase_id=golf_purchase_id)
-    form = GolfPurchasesForm(instance=golf_purchase_id)
+def golf_purchases_update_view(request, gp_id):
+    golfpurchase = Golf_purchases.objects.get(gp_id=gp_id)
+    form = GolfPurchasesForm(instance=golfpurchase)
     if request.method == 'POST':
-        form = GolfPurchasesForm(request.POST, instance=golf_purchase_id)
+        form = GolfPurchasesForm(request.POST, instance=golfpurchase)
         if form.is_valid():
             form.save()
-            return redirect ('home')
-    return render(request, 'golfproapp/golf_purchases_form.html', {'form': form})
+            return redirect ('golf_purchase_list')
+    return render(request, 'golfproapp/purchase_create.html', {'form': form})
 
-def golf_purchases_delete_view(request, golf_purchase_id):
-    golf_purchase_id = Golf_purchases.objects.get(golf_purchase_id=golf_purchase_id)
+def golf_purchases_delete_view(request, gp_id):
+    golfpurchase = Golf_purchases.objects.get(gp_id=gp_id)
     if request.method == 'POST':
-        golf_purchase_id.delete()
-        return redirect('home')
-    return render(request, 'golfproapp/purch_confirm_del.html', {'Golf_purchase' : golf_purchase_id})
+        gp_id.delete()
+        return redirect('golf_purchase_list')
+    return render(request, 'golfproapp/purch_confirm_del.html', {'Golf_purchase' : golfpurchase})
 
