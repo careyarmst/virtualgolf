@@ -63,13 +63,13 @@ def golf_purchases_update_view(request, gp_id):
         form = GolfPurchasesForm(request.POST, instance=golfpurchase)
         if form.is_valid():
             form.save()
-            return redirect ('golf_purchase_list')
+            return redirect ('golf_purchase_list_view')
     return render(request, 'golfproapp/purchase_create.html', {'form': form})
 
 def golf_purchases_delete_view(request, gp_id):
     golfpurchase = Golf_purchases.objects.get(gp_id=gp_id)
     if request.method == 'POST':
         gp_id.delete()
-        return redirect('golf_purchase_list')
+        return redirect('golfapp/golf_purchase_list.html')
     return render(request, 'golfproapp/purch_confirm_del.html', {'Golf_purchase' : golfpurchase})
 

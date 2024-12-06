@@ -16,6 +16,7 @@
                 <th>9 Holes Cost</th>
                 <th>9 Holes Cart Cost</th>
                 <th>18 Holes Cart Cost</th>
+                <th>Golf Subtotal</th>
                 <th>Golf Total</th>
                 <th>Actions</th>       
             
@@ -31,6 +32,7 @@
                 <td>{{ golf_purchase.holes_9_price }} </td>
                 <td>{{ golf_purchase.cart_9_price }} </td>
                 <td>{{ golf_purchase.cart_18_price }} </td>
+                <td>{{ golf_purchase.golf_subtotal }} </td>
                 <td>{{ golf_purchase.golf_total }} </td>
                 <td> 
                     <a href="{% url 'golf_purchase_update' golf_purchase.gp_id %}" class="btn btn-warning" >Update</a>

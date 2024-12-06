@@ -1,5 +1,6 @@
 from django import forms
 from .models import Customer, Golf_purchases, Misc_purchases, Golf_Data
+from calculation import FormulaInput
 import calculation
 
 class CustomerForm(forms.ModelForm):
@@ -85,6 +86,7 @@ class GolfPurchasesForm(forms.ModelForm):
     customer_id = forms.ModelChoiceField(queryset=Customer.objects.all())
     class Meta:
         model = Golf_purchases
+        golf_subtotal = forms.DecimalField(widget=calculation.FormulaInput('holes_18_price + holes_9_price'))
         fields = ['customer_id', 'gp_date', 'gp_id', 'holes_18_price', 'holes_9_price', 'cart_18_price', 'cart_9_price', 'golf_subtotal', 'golf_tax', 'golf_total']
         labels = {
             'gp_id': 'Golf Purchase ID',
@@ -113,8 +115,8 @@ class GolfPurchasesForm(forms.ModelForm):
                 attrs={'placeholder':'e.g. 201-331-2412', 'class':'form-control'}),
             'cart_9_price': forms.NumberInput(
                 attrs={'placeholder':'e.g. bob@aol.com', 'class':'form-control'}),
-            'golf_subtotal': forms.NumberInput(
-                attrs={'placeholder':'e.g. bob@aol.com', 'class':'form-control'}),
+            #'golf_subtotal': forms.DecimalField(
+             #   attrs={'placeholder':'e.g. bob@aol.com', 'class':'form-control'}),
             'golf_tax': forms.NumberInput(
                 attrs={'placeholder':'e.g. bob@aol.com', 'class':'form-control'}),
             'golf_total': forms.NumberInput(
