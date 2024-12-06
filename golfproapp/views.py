@@ -43,9 +43,21 @@ def golf_purchase_create_view(request):
     if request.method == 'POST':
         form = GolfPurchasesForm(request.POST)
         if form.is_valid():
+            get_holes_18_price = form.cleaned_data['holes_18_price']
+            get_holes_9_price = form.cleaned_data['holes_9_price']
+            get_cart_18_price = form.cleaned_data['cart_18_price']
+            get_cart_9_price = form.cleaned_data['holes_18_price']
+            subtotal = float(get_holes_18_price)+float(get_holes_9_price)+float(get_cart_18_price)+float(get_cart_9_price)
+            tax = float(subtotal) * float(.05)
+            total = float(subtotal) + float(tax)
+            context = {
+                'subtotal' :subtotal,
+                'tax':tax,
+                'total': total
+            }
             form.save()
             return redirect ('golf_purchase_list_view')
-    return render(request, 'golfproapp/purchase_create.html', {'form': form})
+    return render(request, 'golfproapp/purchase_create.html',{'form':form})
 
 class golf_purchases_list_view(ListView): 
     model = Golf_purchases
