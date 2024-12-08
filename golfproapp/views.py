@@ -85,3 +85,8 @@ def golf_purchases_delete_view(request, gp_id):
         return redirect('golfapp/golf_purchase_list.html')
     return render(request, 'golfproapp/purch_confirm_del.html', {'Golf_purchase' : golfpurchase})
 
+def golf_purchase_success_view(request,gp_id):
+    golfpurchase = Golf_purchases.objects.get(gp_id=gp_id)
+    return render(request, 'golfproapp/gp_success.html', {'Golf_purchase' : golfpurchase})
+
+
