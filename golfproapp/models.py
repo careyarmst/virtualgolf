@@ -2,6 +2,8 @@
 from django.db import models
 import datetime
 from django.utils import timezone
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
 
 
 # Create your models here.
@@ -66,6 +68,13 @@ class Golf_purchases(models.Model):
     golf_tax=models.DecimalField(default=.05, max_digits=10, decimal_places=2)
     golf_total=models.DecimalField(default=.05, max_digits=10, decimal_places=2)
     
+    def save(self,*args,**kwargs):
+        self.golf_subtotal=float(self.cart_18_price+self.cart_9_price+self.holes_18_price+self.holes_9_price)
+        self.golf_tax=float(self.cart_18_price+self.cart_9_price+self.holes_18_price+self.holes_9_price)*.05
+        self.golf_total=float(self.golf_subtotal+self.golf_tax)
+        super().save(*args, **kwargs)
+
+
     def __str__(self):
       return self.gp_id
 
