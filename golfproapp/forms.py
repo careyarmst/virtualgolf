@@ -86,7 +86,6 @@ class GolfPurchasesForm(forms.ModelForm):
     customer_id = forms.ModelChoiceField(queryset=Customer.objects.all())
     class Meta:
         model = Golf_purchases
-        golf_subtotal = forms.DecimalField(widget=calculation.FormulaInput('holes_18_price + holes_9_price'))
         fields = ['customer_id', 'gp_date', 'gp_id', 'holes_18_price', 'holes_9_price', 'cart_18_price', 'cart_9_price', 'golf_subtotal', 'golf_tax', 'golf_total']
         labels = {
             'gp_id': 'Golf Purchase ID',
@@ -100,6 +99,8 @@ class GolfPurchasesForm(forms.ModelForm):
             'golf_total': 'Golf Total'
 
         }
+    
+
         widgets = {
             'customer_id': forms.NumberInput(
                 attrs={'placeholder':'e.g. 1', 'class':'form-control'}),
@@ -122,4 +123,6 @@ class GolfPurchasesForm(forms.ModelForm):
             'golf_total': forms.NumberInput(
                 attrs={'placeholder':'e.g. bob@aol.com', 'class':'form-control'}),
         }
+
+
 
