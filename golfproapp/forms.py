@@ -1,7 +1,6 @@
 from django import forms
 from .models import Customer, Golf_purchases, Misc_purchases, Golf_Data
-from calculation import FormulaInput
-import calculation
+
 
 class CustomerForm(forms.ModelForm):
     class Meta:
