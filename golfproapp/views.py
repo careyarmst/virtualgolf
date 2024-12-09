@@ -56,7 +56,7 @@ def golf_purchase_create_view(request):
                 'total': total
             }
             form.save()
-            return redirect ('golf_purchase_list_view')
+            return redirect ('gp_success')
     return render(request, 'golfproapp/purchase_create.html',{'form':form})
 
 class golf_purchases_list_view(ListView): 
@@ -87,6 +87,7 @@ def golf_purchases_delete_view(request, gp_id):
 
 def golf_purchase_success_view(request,gp_id):
     golfpurchase = Golf_purchases.objects.get(gp_id=gp_id)
-    return render(request, 'golfproapp/gp_success.html', {'Golf_purchase' : golfpurchase})
+    form = GolfPurchasesForm(request.GET, instance=golfpurchase)
+    return render(request, 'golfproapp/gp_success.html', {'form': form})
 
 

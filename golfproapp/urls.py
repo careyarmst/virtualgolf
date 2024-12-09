@@ -12,6 +12,6 @@ path('gpcreate/', views.golf_purchase_create_view, name='golf_purchase_create'),
 path('gplist/', views.golf_purchases_list_view.as_view(), name = 'golf_purchase_list_view'),
 path('gpupdate/<int:gp_id>/', views.golf_purchases_update_view, name='golf_purchase_update'),
 path('gpdelete/<int:gp_id>/', views.golf_purchases_delete_view, name='golf_purchase_delete'),
-path('gpsuccess/<int:gp_id>/', views.golf_purchase_success_view, name='golf_purchase_success'),
+path('gpsuccess/<int:gp_id>/', views.golf_purchase_success_view, name='gp_success'),
 
 ]
