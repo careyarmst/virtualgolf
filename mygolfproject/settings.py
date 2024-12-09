@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'golfproapp',
+    'calculation',
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"

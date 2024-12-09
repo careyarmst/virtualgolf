@@ -1,0 +1,16 @@
+{% extends "golfproapp/layout.html" %}
+
+<!-- Extend the base layout from the layout.html -->
+
+{% block title %} Golf Purchase Confirmation Form {% endblock %}
+
+{% block content %}
+<h1 class="text-center">Golf Purchase Confirmation Form</h1>
+<form method="GET" class="jumbotron">
+    {% csrf_token %}
+    {{form}}
+    <br>
+    <br>
+    <button class="btn btn-outline-success" type="button">
+</form>
+{% endblock %}

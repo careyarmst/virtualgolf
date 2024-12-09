@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .models import Customer, Golf_purchases
 from .forms import CustomerForm, GolfPurchasesForm
 from django.http import HttpResponse
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 # Create your views here.
 
 def home_view(request):
@@ -37,35 +38,55 @@ def customer_delete_view(request, customer_id):
         return redirect('customer_list')
     return render(request, 'golfproapp/cust_confirm_del.html', {'customer' : customer})
 
-def golf_purchases_create_view(request):
+def golf_purchase_create_view(request):
     form = GolfPurchasesForm()
     if request.method == 'POST':
         form = GolfPurchasesForm(request.POST)
         if form.is_valid():
+            get_holes_18_price = form.cleaned_data['holes_18_price']
+            get_holes_9_price = form.cleaned_data['holes_9_price']
+            get_cart_18_price = form.cleaned_data['cart_18_price']
+            get_cart_9_price = form.cleaned_data['holes_18_price']
+            subtotal = float(get_holes_18_price)+float(get_holes_9_price)+float(get_cart_18_price)+float(get_cart_9_price)
+            tax = float(subtotal) * float(.05)
+            total = float(subtotal) + float(tax)
+            context = {
+                'subtotal' :subtotal,
+                'tax':tax,
+                'total': total
+            }
             form.save()
-            return redirect ('home')
-    return render(request, 'golfproapp/golf_purchases_form.html', {'form': form})
+            return redirect ('golf_purchase_list_view')
+    return render(request, 'golfproapp/purchase_create.html',{'form':form})
 
-#def golf_purchases_list_view(request,golf_purchase_id = "*"):
- #   golf_purchase_id = Golf_purchases.objects.get(golf_purchase_id=golf_purchase_id)
-  #  Golf_purchases = Golf_purchases.objects.all()
-   # return render(request,'golfproapp/customer_list.html', {'Golf_purchases': Golf_purchases})
+class golf_purchases_list_view(ListView): 
+    model = Golf_purchases
+    template_name = 'golf_purchases_list.html'
+    context_object_name='golf_purchase_object_list'
 
-
-def golf_purchases_update_view(request, golf_purchase_id):
-    golf_purchase_id = Golf_purchases.objects.get(golf_purchase_id=golf_purchase_id)
-    form = GolfPurchasesForm(instance=golf_purchase_id)
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset
+    
+def golf_purchases_update_view(request, gp_id):
+    golfpurchase = Golf_purchases.objects.get(gp_id=gp_id)
+    form = GolfPurchasesForm(instance=golfpurchase)
     if request.method == 'POST':
-        form = GolfPurchasesForm(request.POST, instance=golf_purchase_id)
+        form = GolfPurchasesForm(request.POST, instance=golfpurchase)
         if form.is_valid():
             form.save()
-            return redirect ('home')
-    return render(request, 'golfproapp/golf_purchases_form.html', {'form': form})
+            return redirect ('golf_purchase_list_view')
+    return render(request, 'golfproapp/purchase_create.html', {'form': form})
 
-def golf_purchases_delete_view(request, golf_purchase_id):
-    golf_purchase_id = Golf_purchases.objects.get(golf_purchase_id=golf_purchase_id)
+def golf_purchases_delete_view(request, gp_id):
+    golfpurchase = Golf_purchases.objects.get(gp_id=gp_id)
     if request.method == 'POST':
-        golf_purchase_id.delete()
-        return redirect('home')
-    return render(request, 'golfproapp/purch_confirm_del.html', {'Golf_purchase' : golf_purchase_id})
+        gp_id.delete()
+        return redirect('golfapp/golf_purchase_list.html')
+    return render(request, 'golfproapp/purch_confirm_del.html', {'Golf_purchase' : golfpurchase})
+
+def golf_purchase_success_view(request,gp_id):
+    golfpurchase = Golf_purchases.objects.get(gp_id=gp_id)
+    return render(request, 'golfproapp/gp_success.html', {'Golf_purchase' : golfpurchase})
+
 
