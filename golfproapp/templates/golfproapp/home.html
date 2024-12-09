@@ -1,11 +1,13 @@
 {% extends "golfproapp/layout.html" %}
+{% load static %}
 
 {% block title %} Home {% endblock %}
 
 {% block content %}
-  <div class="jumbotron text-center">
+
+   <div class="jumbotron text-center">
     <h1 class="display-4">Welcome to the Pro Shop</h1>
-    <h2><img src="./gcimage.jpg"></h2>
+    <img src = "{% static 'gcimage.jpg' %}" height="200" width="200"/>    
     <p class="lead">
         Manage your Pro Shop!.
     </p>
@@ -17,11 +19,11 @@
           <li>Add, update or delete golf purchases</li>
           <li>View Golf Customers</li>
           <li>View All Golf Purchases</li>
-        </ul>.
+        </ul>
     </p>
-    <a href="{% url 'customer_list' %}" class="btn btn-primary btn-lg" role="button">View Golf Customers</a>
-    <a href="{% url 'customer_create' %}" class="btn btn-primary btn-lg" role="button">Create Golf Customer</a>
-    <a href="{% url 'golf_purchase_create' %}" class="btn btn-primary btn-lg" role="button">Create Golf Purchase</a>
-    <a href="{% url 'golf_purchase_list_view' %}" class="btn btn-primary btn-lg" role="button">View Golf Purchases</a>
+    <a href="{% url 'customer_list' %}" class="btn btn-primary btn-sm" role="button">View Golf Customers</a>
+    <a href="{% url 'customer_create' %}" class="btn btn-primary btn-sm" role="button">Create Golf Customer</a>
+    <a href="{% url 'golf_purchase_create' %}" class="btn btn-primary btn-sm" role="button">Create Golf Purchase</a>
+    <a href="{% url 'golf_purchase_list_view' %}" class="btn btn-primary btn-sm" role="button">View Golf Purchases</a>
   </div>
 {% endblock %}

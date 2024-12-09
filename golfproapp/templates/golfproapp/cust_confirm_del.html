@@ -1,1 +1,13 @@
 {% extends "golfproapp/layout.html" %}
+
+{% block title %} Delete Golf Customer {% endblock title %}
+
+{% block content %}
+<h1 class = "text-center">Are you sure you want to delete the golf customer?</h1>
+<form method="POST" class="text-center">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Confirm</button>
+    <a href="{% url 'customer_list' %}" class="btn btn-secondary">Cancel</a>
+</form>
+
+{% endblock content %}
