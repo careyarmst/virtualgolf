@@ -60,8 +60,12 @@ class Golf_purchases(models.Model):
     customer_id = models.ForeignKey(Customer, on_delete=models.CASCADE)
     gp_date= models.DateField(default=timezone.now)
     gp_id = models.IntegerField(default=1, unique=True)
+    num_18_players = models.IntegerField(default=1)
     holes_18_price = models.DecimalField(default=35.00, max_digits=10, decimal_places=2)
+    num_9_players = models.IntegerField(default=1)
     holes_9_price = models.DecimalField(default=20.00, max_digits=10, decimal_places=2)
+    num_18_carts = models.IntegerField(default=1)
+    num_9_carts = models.IntegerField(default=1)
     cart_9_price = models.DecimalField(default=9.00, max_digits=10, decimal_places=2)
     cart_18_price = models.DecimalField(default=12.00, max_digits=10, decimal_places=2)
     golf_subtotal = models.DecimalField(default=0.00, max_digits=10, decimal_places=2)
@@ -69,6 +73,10 @@ class Golf_purchases(models.Model):
     golf_total=models.DecimalField(default=.05, max_digits=10, decimal_places=2)
     
     def save(self,*args,**kwargs):
+        self.holes_18_price=float(self.num_18_players*self.holes_18_price)
+        self.holes_9_price=float(self.holes_9_price*self.num_9_players)
+        self.cart_9_price=float(self.cart_9_price*self.num_9_carts)
+        self.cart_18_price=float(self.cart_18_price*self.num_18_carts)
         self.golf_subtotal=float(self.cart_18_price+self.cart_9_price+self.holes_18_price+self.holes_9_price)
         self.golf_tax=float(self.cart_18_price+self.cart_9_price+self.holes_18_price+self.holes_9_price)*.05
         self.golf_total=float(self.golf_subtotal+self.golf_tax)
