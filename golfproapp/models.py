@@ -21,8 +21,7 @@ def __str__(self):
     return self.Customer.customer_id
 
 class Misc_purchases(models.Model):
-    customer_id = models.AutoField(primary_key=True)
-    mp_date = models.DateField(timezone.now)
+    mp_date = models.DateField(default=timezone.now)
     purch_id = models.IntegerField(default=1)
     inv_id = models.IntegerField(default=1)
     inv_description = models.CharField(default="Hat",max_length=255)
@@ -43,8 +42,14 @@ class Misc_purchases(models.Model):
     misc_tax=models.DecimalField(default=.05, max_digits=10, decimal_places=2)
     misc_total=models.DecimalField(default=.05, max_digits=10, decimal_places=2)
 
+    def save(self,*args,**kwargs):
+        self.misc_subtotal=float(self.misc_quantity*self.misc_price)
+        self.misc_tax=float(self.misc_quantity+self.misc_price)*.05
+        self.misc_total=float(self.misc_subtotal+self.misc_tax)
+        super().save(*args, **kwargs)
+  
 def __str__(self):
-    return self.customer.id
+    return self.purch_id
 
 class Golf_Data(models.Model):
     customer_id = models.ForeignKey(Customer, on_delete=models.CASCADE)

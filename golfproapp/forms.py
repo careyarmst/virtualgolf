@@ -32,10 +32,12 @@ class CustomerForm(forms.ModelForm):
 class Misc_purchasesForm(forms.ModelForm):
     class Meta: 
         model = Misc_purchases
-        fields = '__all__'
+        fields = ['mp_date', 'purch_id', 'inv_id', 'ichoice', 'misc_quantity', 'misc_price', 'misc_subtotal', 'misc_total']
         labels = {
+            'mp_date':'Purchase Date',
+            'purch_id': 'Purchase ID',
             'inv_id': 'Inventory ID',
-            'inv_description' : 'Item Description',
+            'ichoice': 'Inventory Choices',
             'misc_quantity' : 'Quantity',
             'misc_price' : 'Price',
             'misc_subtotal':'Subtotal',
@@ -43,9 +45,13 @@ class Misc_purchasesForm(forms.ModelForm):
             'misc_total': 'Total'
         }
         widget = {
+            'mp_date': forms.DateInput(
+               attrs={'placeholder':'e.g. Yes/No', 'class':'form-control'}),
+            'purch_id': forms.NumberInput(
+                attrs={'placeholder':'e.g. 1', 'class':'form-control'}),
             'inv_id': forms.NumberInput(
                 attrs={'placeholder':'e.g. 1', 'class':'form-control'}),
-            'inv_description': forms.TextInput(
+            'ichoice': forms.TextInput(
                 attrs={'placeholder':'e.g. S12345', 'class':'form-control'}),
             'misc_quantity': forms.NumberInput(
                 attrs={'placeholder':'e.g. 19.99', 'class':'form-control'}),

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from .models import Customer, Golf_purchases
-from .forms import CustomerForm, GolfPurchasesForm
+from .models import Customer, Golf_purchases, Misc_purchases
+from .forms import CustomerForm, GolfPurchasesForm, Misc_purchasesForm
 from django.http import HttpResponse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
 # Create your views here.
@@ -90,4 +90,37 @@ def golf_purchase_success_view(request,gp_id):
     form = GolfPurchasesForm(request.GET, instance=golfpurchase)
     return render(request, 'golfproapp/gp_success.html', {'form': form})
 
+def misc_purchase_create_view(request):
+    form = Misc_purchasesForm()
+    if request.method == 'POST':
+        form = Misc_purchasesForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect ('misc_purchase_list')
+    return render(request, 'golfproapp/misc_purchase_create.html',{'form':form})
 
+class misc_purchases_list_view(ListView): 
+    model = Misc_purchases
+    template_name = 'misc_purchase_list'
+    context_object_name='misc_purchase_object_list'
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset
+
+def misc_purchases_update_view(request, purch_id):
+    miscpurchase = Misc_purchases.objects.get(purch_id=purch_id)
+    form = Misc_purchasesForm(instance=miscpurchase)
+    if request.method == 'POST':
+        form = Misc_purchasesForm(request.POST, instance=miscpurchase)
+        if form.is_valid():
+            form.save()
+            return redirect ('misc_purchase_list')
+    return render(request, 'golfproapp/misc_purchase_create.html', {'form': form})
+
+def misc_purchases_delete_view(request, purch_id):
+    mpurchase = Misc_purchases.objects.get(purch_id=purch_id)
+    if request.method == 'POST':
+        mpurchase.delete()
+        return redirect ('misc_purchase_list')
+    return render(request, 'golfproapp/misc_confirm_del.html', {'purch_id': purch_id})
