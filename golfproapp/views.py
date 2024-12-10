@@ -1,13 +1,16 @@
 from django.shortcuts import render, redirect
 from .models import Customer, Golf_purchases, Misc_purchases
 from .forms import CustomerForm, GolfPurchasesForm, Misc_purchasesForm
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpRequest
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
 # Create your views here.
 
 def home_view(request):
     return render(request, 'golfproapp/home.html')
 
+#from django.contrib.auth.decorators import login_required
+
+#@login_required(redirect_field_name="{% url 'login' %}")
 def customer_create_view(request):
     form = CustomerForm()
     if request.method == 'POST':
@@ -38,6 +41,9 @@ def customer_delete_view(request, customer_id):
         return redirect ('customer_list')
     return render(request, 'golfproapp/cust_confirm_del.html', {'customer ID': customer_id})
 
+#from django.contrib.auth.decorators import login_required
+
+#@login_required(redirect_field_name="{% url 'login' %}")
 def golf_purchase_create_view(request):
     form = GolfPurchasesForm()
     if request.method == 'POST':
@@ -56,7 +62,7 @@ def golf_purchase_create_view(request):
                 'total': total
             }
             form.save()
-            return redirect ('gp_success')
+            return redirect ('golf_purchase_list_view')
     return render(request, 'golfproapp/purchase_create.html',{'form':form})
 
 class golf_purchases_list_view(ListView): 

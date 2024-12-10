@@ -1,0 +1,17 @@
+<head>
+    <style type = "text/css">
+    div {
+        background:#B0E6E6;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    </style>
+<head>
+<div>
+<h1>Register</h1>
+<h2>Welcome to the Golf Pro Shop App Login Page!</h2>
+<form method="post" novalidate>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Register">
+</form>
+</div>
