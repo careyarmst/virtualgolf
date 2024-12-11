@@ -17,5 +17,9 @@ path('mpcreate/', views.misc_purchase_create_view, name='misc_purchase_create'),
 path('mplist/', views.misc_purchases_list_view.as_view(), name = 'misc_purchase_list'),
 path('mpupdate/<int:purch_id>/', views.misc_purchases_update_view, name='misc_purchase_update'),
 path('mpdelete/<int:purch_id>/', views.misc_purchases_delete_view, name='misc_purchase_delete'),
+path('create_teetime/', views.create_teetime_view, name='create_teetime'),
+path('teetimes/',views.tee_time_list_view.as_view(), name = 'tee_time_list'),
+path('teeupdate/<int:tee_time_id>/', views.tee_time_update_view, name='tee_time_update'),
+path('teedelete/<int:tee_time_id>/', views.tee_time_delete_view, name='tee_time_delete'),
 
 ]

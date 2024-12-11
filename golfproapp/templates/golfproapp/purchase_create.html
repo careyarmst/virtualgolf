@@ -9,5 +9,14 @@
     {% csrf_token %}
     {{form.as_p}}
     <button class="btn btn-success btn-block" type="submit">Save Golf Purchase</button>
+    <button class="btn btn-success btn-block" type="button" onclick="printForm()">Print Purchase</button>
+    <button class="btn btn-light btn-block"><a href="{% url 'golf_purchase_list_view' %}">Return to Purchase List</a></button>
+    <script>
+        function printForm() {
+            window.print();
+            }
+    </script>
+
+    
 </form>
 {% endblock %}

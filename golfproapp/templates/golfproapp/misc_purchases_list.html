@@ -37,8 +37,8 @@
                 <td>{{ misc_purchase.misc_tax }} </td>
                 <td>{{ misc_purchase.misc_total }} </td>
                 <td> 
-                    <a href="{% url 'misc_purchase_update' misc_purchase.purch_id %}" class="btn btn-warning" >Update</a>
-                    <a href="{% url 'misc_purchase_delete' misc_purchase.purch_id %}" class="btn btn-danger" >Delete</a>
+                    <a href="{% url 'misc_purchase_update' misc_purchase.purch_id %}" class="btn btn-warning" >Update/Print Receipt</a>
+                    <a href="{% url 'misc_purchase_delete' misc_purchase.purch_id %}" class="btn btn-danger" >Delete Purchase</a>
                 </td>  
             </tr>
             {% endfor %}

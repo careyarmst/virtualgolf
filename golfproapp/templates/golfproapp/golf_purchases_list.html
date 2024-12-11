@@ -45,8 +45,8 @@
                 <td>{{ golf_purchase.golf_tax }} </td>
                 <td>{{ golf_purchase.golf_total }} </td>
                 <td> 
-                    <a href="{% url 'golf_purchase_update' golf_purchase.gp_id %}" class="btn btn-warning" >Update</a>
-                    <a href="{% url 'golf_purchase_delete' golf_purchase.gp_id %}" class="btn btn-danger" >Delete</a>
+                    <a href="{% url 'golf_purchase_update' golf_purchase.gp_id %}" class="btn btn-warning" >Update/Print Receipt</a>
+                    <a href="{% url 'golf_purchase_delete' golf_purchase.gp_id %}" class="btn btn-danger" >Delete Purchase</a>
                 </td>  
             </tr>
             {% endfor %}

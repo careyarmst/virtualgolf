@@ -12,8 +12,8 @@ class Customer(models.Model):
     customer_id = models.AutoField(primary_key=True)
     golferchoice=[('Y','Yes'),('N','No'),]
     gchoice = models.CharField(max_length=1, choices=golferchoice, default='Y')
-    fname = models.TextField(max_length=10, default="Golfer1")
-    lname = models.TextField(max_length=10, default="Golfer1Lname")
+    fname = models.TextField(max_length=15, default="First Name")
+    lname = models.TextField(max_length=20, default="Last Name")
     g_phone = models.CharField(default="555-867-5309", max_length=15)
     g_email = models.CharField(default="bob.smith@aol.com", max_length=30)
 
@@ -53,8 +53,15 @@ def __str__(self):
 
 class Golf_Data(models.Model):
     customer_id = models.ForeignKey(Customer, on_delete=models.CASCADE)
-    golf_date = models.DateField(default='2024-11-24')
-    tee_time = models.DateTimeField(default=datetime.datetime(2024,11,24,23,59,59))
+    tee_time_id=models.IntegerField(default=1, unique=True)
+    golf_date = models.DateField()
+    tee_time = models.TimeField()
+    datetime = models.DateTimeField(default=timezone.now)
+    hole_choices = [
+                  ('9','9 Holes'),
+                  ('18','18 Holes')
+    ]
+    holes = models.CharField(max_length=2, choices=hole_choices, default=('18','18 Holes'))
     no_in_party = models.PositiveIntegerField(default=4)
     avg_grp_hcp = models.PositiveIntegerField(default=26)
 
@@ -90,5 +97,6 @@ class Golf_purchases(models.Model):
 
     def __str__(self):
       return self.gp_id
+
 
 

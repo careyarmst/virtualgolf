@@ -32,7 +32,7 @@ class CustomerForm(forms.ModelForm):
 class Misc_purchasesForm(forms.ModelForm):
     class Meta: 
         model = Misc_purchases
-        fields = ['id','mp_date', 'purch_id', 'inv_id', 'ichoice', 'misc_quantity', 'misc_price']
+        fields = ['id','mp_date', 'purch_id', 'inv_id', 'ichoice', 'misc_quantity', 'misc_price', 'misc_subtotal', 'misc_tax', 'misc_total']
         labels = {
             'id':'id',
             'mp_date':'Purchase Date',
@@ -68,20 +68,28 @@ class Misc_purchasesForm(forms.ModelForm):
 
 
 class GolfDataForm(forms.ModelForm):
+    customer_id = forms.ModelChoiceField(queryset=Customer.objects.all())
     class Meta:
         model = Golf_Data
-        fields = '__all__'
+        fields = ['customer_id', 'tee_time_id','golf_date', 'tee_time', 'holes', 'no_in_party', 'avg_grp_hcp']
         labels = {
             'customer_id': 'Golf Customer ID',
+            'tee_time_id': 'Tee Time ID',
+            'golf_date' 'Golf Date'
             'tee_time': 'Tee Time',
+            'holes': 'Holes',
             'no_in_party': 'Number in Group',
             'avg_grp_hcp': 'Group Average Handicap'
         } 
-        widget = {
-             'customer_id': forms.NumberInput(
+        
+        widgets = {
+            'customer_id': forms.NumberInput(
                 attrs={'placeholder':'e.g. 1', 'class':'form-control'}),
-            'tee_time': forms.TextInput(
-                attrs={'placeholder':'e.g. shirt', 'class':'form-control'}),
+            'tee_time_id': forms.NumberInput(
+                attrs={'placeholder':'e.g. 1', 'class':'form-control'}),
+            'golf_date': forms.DateInput(attrs={'class': 'datepicker'}),
+            'holes':forms.TextInput(
+                attrs={'placeholder':'e.g. S12345', 'class':'form-control'}),
             'no_in_party': forms.NumberInput(
                 attrs={'placeholder':'e.g. S12345', 'class':'form-control'}),
             'avg_grp_hcp': forms.NumberInput(
@@ -92,9 +100,8 @@ class GolfPurchasesForm(forms.ModelForm):
     customer_id = forms.ModelChoiceField(queryset=Customer.objects.all())
     class Meta:
         model = Golf_purchases
-        fields = ['id','customer_id', 'gp_date', 'gp_id', 'num_18_players', 'holes_18_price', 'num_18_carts', 'cart_18_price','num_9_players','holes_9_price', 'num_9_carts', 'cart_9_price']
+        fields = ['customer_id', 'gp_date', 'gp_id', 'num_18_players', 'holes_18_price', 'num_18_carts', 'cart_18_price','num_9_players','holes_9_price', 'num_9_carts', 'cart_9_price', 'golf_subtotal', 'golf_tax', 'golf_total']
         labels = {
-            'id': 'id',
             'gp_id': 'Golf Purchase ID',
             'gp_date': 'Golf Purchase Date',
             'num_18_players': 'Number of players 18 holes',
@@ -105,13 +112,12 @@ class GolfPurchasesForm(forms.ModelForm):
             'holes_9_price' : 'Golf Price (9 Holes)',
             'num_9_carts': 'Number of Carts (9 Holes)',
             'cart_9_price' : 'Cart Price (9 Holes)',
-            #'golf_subtotal': 'Golf Subtotal',
-            #'golf_tax': 'Golf Tax',
-            #'golf_total': 'Golf Total'
+            'golf_subtotal': 'Golf Subtotal',
+            'golf_tax': 'Golf Tax',
+            'golf_total': 'Golf Total'
 
         }
     
-
         widgets = {
             'customer_id': forms.NumberInput(
                attrs={'placeholder':'e.g. 1', 'class':'form-control'}),
@@ -127,13 +133,12 @@ class GolfPurchasesForm(forms.ModelForm):
                attrs={'placeholder':'e.g. 201-331-2412', 'class':'form-control'}),
             'cart_9_price': forms.NumberInput(
                attrs={'placeholder':'e.g. bob@aol.com', 'class':'form-control'}),
-            #'golf_subtotal': forms.DecimalField(
-             #  attrs={'placeholder':'e.g. bob@aol.com', 'class':'form-control'}),
-            #'golf_tax': forms.NumberInput(
-              #  attrs={'placeholder':'e.g. bob@aol.com', 'class':'form-control'}),
-            #'golf_total': forms.NumberInput(
-               # attrs={'placeholder':'e.g. bob@aol.com', 'class':'form-control'}),
+            'golf_subtotal': forms.NumberInput(
+                attrs={'readonly':'True'}),
+            'golf_tax': forms.NumberInput(
+                attrs={'readonly':'True'}),
+            'golf_total': forms.NumberInput(
+                attrs={'readonly':'True'}),
+    
         }
-
-
 

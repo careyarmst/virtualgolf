@@ -8,6 +8,14 @@
 <form method="POST" class="jumbotron">
     {% csrf_token %}
     {{form.as_p}}
-    <button class="btn btn-success btn-block" type="submit">Save Miscellaneous Purchase</button>
+    <button class="btn btn-success btn-block" type="submit">Save Misc Purchase</button>
+    <button class="btn btn-success btn-block" type="button" onclick="printForm()">Print Misc Purchase</button>
+    <button class="btn btn-light btn-block"><a href="{% url 'misc_purchase_list' %}">Return to Purchase List</a></button>
+    <script>
+        function printForm() {
+            window.print();
+            }
+    </script>
+    
 </form>
 {% endblock %}

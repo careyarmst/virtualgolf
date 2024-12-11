@@ -1,0 +1,46 @@
+{% extends "golfproapp/layout.html" %}
+
+<!-- Extend the base layout from the layout.html -->
+
+{% block title %} Tee Times List {% endblock %}
+
+{% block content %}
+<br>
+<br>
+<br>
+<h1 class="text-center">Tee Times</h1>
+    <table class="table table-bordered table-striped ">
+        <thead class="thead-dark">
+            <tr>
+                <th>Customer ID</th>
+                <th>Tee Time ID</th>
+                <th>Tee Time Date</th>
+                <th>Tee Time</th>
+                <th>Date / Time Booked</th>
+                <th>Holes</th>
+                <th># in Group</th>
+                <th>Group Average Handicap</th>
+                <th>Actions</th>       
+            
+            </tr>
+        </thead>
+        <tbody>
+            {% for tee_time in object_list %}
+            <tr>
+                <td>{{ tee_time.customer_id }} </td>
+                <td>{{ tee_time.tee_time_id }} </td>
+                <td>{{ tee_time.golf_date }} </td>
+                <td>{{ tee_time.tee_time }} </td>
+                <td>{{ tee_time.datetime }} </td>
+                <td>{{ tee_time.get_holes_display }} </td>
+                <td>{{ tee_time.no_in_party }} </td>
+                <td>{{ tee_time.avg_grp_hcp }} </td>
+                <td> 
+                    <a href="{% url 'tee_time_update' tee_time.tee_time_id %}" class="btn btn-warning" >Update Tee Time</a>
+                    <a href="{% url 'tee_time_delete' tee_time.tee_time_id %}" class="btn btn-danger" >Delete Tee Time</a>   
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'golfproapp',
     'users',
+    'bootstrap_datepicker_plus',
     
 ]
 

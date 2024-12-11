@@ -1,0 +1,18 @@
+{% extends "golfproapp/layout.html" %}
+<br>
+<br>
+<br>
+{% block title %} Delete Tee Time {% endblock title %}
+
+{% block content %}
+<br>
+<br>
+<br>
+<h1 class = "text-center">Are you sure you want to delete this tee time?</h1>
+<form method="POST" class="text-center">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Confirm</button>
+    <a href="{% url 'tee_time_list' %}" class="btn btn-secondary">Cancel</a>
+</form>
+
+{% endblock content %}

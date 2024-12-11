@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from .models import Customer, Golf_purchases, Misc_purchases
-from .forms import CustomerForm, GolfPurchasesForm, Misc_purchasesForm
+from .models import Customer, Golf_purchases, Misc_purchases, Golf_Data
+from .forms import CustomerForm, GolfPurchasesForm, Misc_purchasesForm, GolfDataForm
 from django.http import HttpResponse, HttpRequest
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django.shortcuts import render, get_object_or_404
@@ -44,26 +44,12 @@ def customer_delete_view(request, customer_id):
         return redirect ('customer_list')
     return render(request, 'golfproapp/cust_confirm_del.html', {'customer ID': customer_id})
 
-#from django.contrib.auth.decorators import login_required
-
 @login_required(redirect_field_name="{% url 'login' %}")
 def golf_purchase_create_view(request):
     form = GolfPurchasesForm()
     if request.method == 'POST':
         form = GolfPurchasesForm(request.POST)
         if form.is_valid():
-            get_holes_18_price = form.cleaned_data['holes_18_price']
-            get_holes_9_price = form.cleaned_data['holes_9_price']
-            get_cart_18_price = form.cleaned_data['cart_18_price']
-            get_cart_9_price = form.cleaned_data['holes_18_price']
-            subtotal = float(get_holes_18_price)+float(get_holes_9_price)+float(get_cart_18_price)+float(get_cart_9_price)
-            tax = float(subtotal) * float(.05)
-            total = float(subtotal) + float(tax)
-            context = {
-                'subtotal' :subtotal,
-                'tax':tax,
-                'total': total
-            }
             form.save()
             return redirect ('golf_purchase_list_view')
     return render(request, 'golfproapp/purchase_create.html',{'form':form})
@@ -138,3 +124,41 @@ def misc_purchases_delete_view(request, purch_id):
         mpurchase.delete()
         return redirect ('misc_purchase_list')
     return render(request, 'golfproapp/misc_confirm_del.html', {'purch_id': purch_id})
+
+@login_required(redirect_field_name="{% url 'login' %}")
+def create_teetime_view(request):
+    form = GolfDataForm()
+    if request.method == 'POST':
+        form = GolfDataForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('tee_time_list')
+    return render(request, 'golfproapp/tee_time.html', {'form': form})
+
+class tee_time_list_view(ListView): 
+    model = Golf_Data
+    template_name = 'golfproapp/tee_times_list.html'
+    context_object_name='golf_data_object_list'
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset
+
+@login_required(redirect_field_name="{% url 'login' %}")
+def tee_time_update_view(request, tee_time_id):
+    tbookupd = Golf_Data.objects.get(tee_time_id=tee_time_id)
+    form = GolfDataForm(instance=tbookupd)
+    if request.method == 'POST':
+        form = GolfDataForm(request.POST, instance=tbookupd)
+        if form.is_valid():
+            form.save()
+            return redirect ('tee_times_list')
+    return render(request, 'golfproapp/tee_time.html', {'form': form})
+
+@login_required(redirect_field_name="{% url 'login' %}")
+def tee_time_delete_view(request, tee_time_id):
+    dbookupd = Golf_Data.objects.get(tee_time_id=tee_time_id)
+    if request.method == 'POST':
+        dbookupd.delete()
+        return redirect ('tee_time_list')
+    return render(request, 'golfproapp/tee_time_del.html', {'tee_time_id': tee_time_id})
