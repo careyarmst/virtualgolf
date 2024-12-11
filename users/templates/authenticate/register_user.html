@@ -1,0 +1,22 @@
+{% extends "golfproapp/layout.html" %}
+
+{% block title %} Pro Shop Application Register User {% endblock title %}
+
+{% block content %}
+<br>
+<br>
+{% if form.errors %}
+<p>Hmmmm. Something didn't work there.</p>
+{% endif %}
+
+<form action="{% url 'register_user' %}" method="POST">
+    {% csrf_token %}
+    {{ form.as_p}}
+<form>
+<br>
+<br>
+        
+        <button type="submit" class="btn btn-primary">Submit</button>
+ </form>
+
+{% endblock content %}

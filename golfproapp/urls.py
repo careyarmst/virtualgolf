@@ -3,7 +3,6 @@ from . import views
 from .models import Golf_purchases
 
 urlpatterns = [
-#path('', views.index, name="index"),
 path('', views.home_view, name='home'),
 path('create/', views.customer_create_view, name='customer_create'),
 path('list/', views.customer_list_view, name='customer_list'),

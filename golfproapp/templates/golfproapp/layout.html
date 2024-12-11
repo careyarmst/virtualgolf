@@ -34,7 +34,22 @@
             <span class="navbar-toggler-icon"></span>  <!-- Button to toggle the navbar on smaller screens -->
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">  <!-- Collapsible navbar content -->
+            <br>
+            <br>
             <ul class="navbar-nav">  <!-- Navbar items container -->
+              {% if user.is_authenticated %}
+                <li class = "nav-item">
+                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+              
+                </li>
+              {% else %}
+              <li class = "nav-item">
+                <a class="nav-link" href="{% url 'register_user' %}">Register User</a>
+                <li class = "nav-item">
+                <a class="nav-link" href="{% url 'login' %}">Login</a>
+              
+              </li>
+              {% endif %}
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'customer_create' %}">Add Golf Customer</a>  <!-- Link to the customer creation page -->
                 </li>
@@ -57,7 +72,18 @@
         </div>
     </nav>
     <div class="container">
-        {% block content %}{% endblock  %}
+      {% if messages %}
+        {% for message in messages %}
+          
+          <div class="alert 
+           alert-warning alert-dismissible fade show" role="alert">
+           {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
+
+        {% block content %}
+        {% endblock  %}
     </div>
     <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
     <script src="

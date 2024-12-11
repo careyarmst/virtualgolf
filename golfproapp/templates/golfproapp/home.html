@@ -9,7 +9,7 @@
     <h1 class="display-4">Welcome to the Pro Shop</h1>
     <img src = "{% static 'gcimage.jpg' %}" height="200" width="200"/>    
     <p class="lead">
-        Manage your Pro Shop!.
+        
     </p>
     <hr class="my-4">
     <p>
@@ -22,12 +22,12 @@
         </ul>
     
     </p>
-    <p>
-    <a href="{% url 'login' %}" class="btn btn-warning" >Login Page</a><button class="btn"></button>
-    </p>
-    <a href="{% url 'customer_list' %}" class="btn btn-primary btn-sm" role="button">View Golf Customers</a>
+    
     <a href="{% url 'customer_create' %}" class="btn btn-primary btn-sm" role="button">Create Golf Customer</a>
-    <a href="{% url 'golf_purchase_create' %}" class="btn btn-primary btn-sm" role="button">Create Golf Purchase</a>
+    <a href="{% url 'customer_list' %}" class="btn btn-primary btn-sm" role="button">View Golf Customers</a>
     <a href="{% url 'golf_purchase_list_view' %}" class="btn btn-primary btn-sm" role="button">View Golf Purchases</a>
-  </div>
+    <a href="{% url 'golf_purchase_create' %}" class="btn btn-primary btn-sm" role="button">Create Golf Purchase</a>
+    <a href="{% url 'misc_purchase_create' %}" class="btn btn-primary btn-sm" role="button">Create Misc Purchase</a>
+    <a href="{% url 'misc_purchase_list' %}" class="btn btn-primary btn-sm" role="button">View Misc Purchases</a>
+    </div>
 {% endblock %}
