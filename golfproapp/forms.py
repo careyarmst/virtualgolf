@@ -32,8 +32,9 @@ class CustomerForm(forms.ModelForm):
 class Misc_purchasesForm(forms.ModelForm):
     class Meta: 
         model = Misc_purchases
-        fields = ['mp_date', 'purch_id', 'inv_id', 'ichoice', 'misc_quantity', 'misc_price']
+        fields = ['id','mp_date', 'purch_id', 'inv_id', 'ichoice', 'misc_quantity', 'misc_price']
         labels = {
+            'id':'id',
             'mp_date':'Purchase Date',
             'purch_id': 'Purchase ID',
             'inv_id': 'Inventory ID',
@@ -91,8 +92,9 @@ class GolfPurchasesForm(forms.ModelForm):
     customer_id = forms.ModelChoiceField(queryset=Customer.objects.all())
     class Meta:
         model = Golf_purchases
-        fields = ['customer_id', 'gp_date', 'gp_id', 'num_18_players', 'holes_18_price', 'num_18_carts', 'cart_18_price','num_9_players','holes_9_price', 'num_9_carts', 'cart_9_price']
+        fields = ['id','customer_id', 'gp_date', 'gp_id', 'num_18_players', 'holes_18_price', 'num_18_carts', 'cart_18_price','num_9_players','holes_9_price', 'num_9_carts', 'cart_9_price']
         labels = {
+            'id': 'id',
             'gp_id': 'Golf Purchase ID',
             'gp_date': 'Golf Purchase Date',
             'num_18_players': 'Number of players 18 holes',

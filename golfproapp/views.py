@@ -36,6 +36,7 @@ def customer_update_view(request, customer_id):
             return redirect ('customer_list')
     return render(request, 'golfproapp/customer_form.html', {'form': form})
 
+@login_required(redirect_field_name="{% url 'login' %}")
 def customer_delete_view(request, customer_id):
     customer = Customer.objects.get(customer_id=customer_id)
     if request.method == 'POST':
@@ -76,6 +77,7 @@ class golf_purchases_list_view(ListView):
         queryset = super().get_queryset()
         return queryset
     
+@login_required(redirect_field_name="{% url 'login' %}")    
 def golf_purchases_update_view(request, gp_id):
     golfpurchase = Golf_purchases.objects.get(gp_id=gp_id)
     form = GolfPurchasesForm(instance=golfpurchase)
@@ -86,6 +88,7 @@ def golf_purchases_update_view(request, gp_id):
             return redirect ('golf_purchase_list_view')
     return render(request, 'golfproapp/purchase_create.html', {'form': form})
 
+@login_required(redirect_field_name="{% url 'login' %}")
 def golf_purchases_delete_view(request, gp_id):
     gpurchase = Golf_purchases.objects.get(gp_id=gp_id)
     if request.method == 'POST':
@@ -116,7 +119,8 @@ class misc_purchases_list_view(ListView):
     def get_queryset(self):
         queryset = super().get_queryset()
         return queryset
-
+    
+@login_required(redirect_field_name="{% url 'login' %}")
 def misc_purchases_update_view(request, purch_id):
     miscpurchase = Misc_purchases.objects.get(purch_id=purch_id)
     form = Misc_purchasesForm(instance=miscpurchase)
@@ -127,6 +131,7 @@ def misc_purchases_update_view(request, purch_id):
             return redirect ('misc_purchase_list')
     return render(request, 'golfproapp/misc_purchase_create.html', {'form': form})
 
+@login_required(redirect_field_name="{% url 'login' %}")
 def misc_purchases_delete_view(request, purch_id):
     mpurchase = Misc_purchases.objects.get(purch_id=purch_id)
     if request.method == 'POST':
