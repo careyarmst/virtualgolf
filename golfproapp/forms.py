@@ -32,7 +32,7 @@ class CustomerForm(forms.ModelForm):
 class Misc_purchasesForm(forms.ModelForm):
     class Meta: 
         model = Misc_purchases
-        fields = ['mp_date', 'purch_id', 'inv_id', 'ichoice', 'misc_quantity', 'misc_price', 'misc_subtotal', 'misc_total']
+        fields = ['mp_date', 'purch_id', 'inv_id', 'ichoice', 'misc_quantity', 'misc_price']
         labels = {
             'mp_date':'Purchase Date',
             'purch_id': 'Purchase ID',
@@ -57,12 +57,12 @@ class Misc_purchasesForm(forms.ModelForm):
                 attrs={'placeholder':'e.g. 19.99', 'class':'form-control'}),
             'misc_price': forms.NumberInput(
                 attrs={'placeholder':'e.g. 19.99', 'class':'form-control'}),
-            'misc_subtotal': forms.NumberInput(
-                attrs={'placeholder':'e.g. 19.99', 'class':'form-control'}),
-            'misc_tax': forms.NumberInput(
-                attrs={'placeholder':'e.g. 19.99', 'class':'form-control'}),
-            'misc_total': forms.NumberInput(
-                attrs={'placeholder':'e.g. 19.99', 'class':'form-control'}),
+            #'misc_subtotal': forms.NumberInput(
+             #   attrs={'placeholder':'e.g. 19.99', 'class':'form-control'}),
+            #'misc_tax': forms.NumberInput(
+              #  attrs={'placeholder':'e.g. 19.99', 'class':'form-control'}),
+            #'misc_total': forms.NumberInput(
+             #   attrs={'placeholder':'e.g. 19.99', 'class':'form-control'}),
         }
 
 
@@ -91,7 +91,7 @@ class GolfPurchasesForm(forms.ModelForm):
     customer_id = forms.ModelChoiceField(queryset=Customer.objects.all())
     class Meta:
         model = Golf_purchases
-        fields = ['customer_id', 'gp_date', 'gp_id', 'num_18_players', 'holes_18_price', 'num_18_carts', 'cart_18_price','num_9_players','holes_9_price', 'num_9_carts', 'cart_9_price', 'golf_subtotal', 'golf_tax', 'golf_total']
+        fields = ['customer_id', 'gp_date', 'gp_id', 'num_18_players', 'holes_18_price', 'num_18_carts', 'cart_18_price','num_9_players','holes_9_price', 'num_9_carts', 'cart_9_price']
         labels = {
             'gp_id': 'Golf Purchase ID',
             'gp_date': 'Golf Purchase Date',
@@ -103,9 +103,9 @@ class GolfPurchasesForm(forms.ModelForm):
             'holes_9_price' : 'Golf Price (9 Holes)',
             'num_9_carts': 'Number of Carts (9 Holes)',
             'cart_9_price' : 'Cart Price (9 Holes)',
-            'golf_subtotal': 'Golf Subtotal',
-            'golf_tax': 'Golf Tax',
-            'golf_total': 'Golf Total'
+            #'golf_subtotal': 'Golf Subtotal',
+            #'golf_tax': 'Golf Tax',
+            #'golf_total': 'Golf Total'
 
         }
     
