@@ -3,14 +3,15 @@ from .models import Customer, Golf_purchases, Misc_purchases
 from .forms import CustomerForm, GolfPurchasesForm, Misc_purchasesForm
 from django.http import HttpResponse, HttpRequest
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.shortcuts import render, get_object_or_404
+from django.contrib.auth.decorators import login_required
+
 # Create your views here.
 
 def home_view(request):
     return render(request, 'golfproapp/home.html')
 
-#from django.contrib.auth.decorators import login_required
-
-#@login_required(redirect_field_name="{% url 'login' %}")
+@login_required(redirect_field_name="{% url 'login' %}")
 def customer_create_view(request):
     form = CustomerForm()
     if request.method == 'POST':
@@ -24,6 +25,7 @@ def customer_list_view(request):
     customers = Customer.objects.all()
     return render(request,'golfproapp/customer_list.html', {'customers': customers})
 
+@login_required(redirect_field_name="{% url 'login' %}")
 def customer_update_view(request, customer_id):
     customer = Customer.objects.get(customer_id=customer_id)
     form = CustomerForm(instance=customer)
@@ -43,7 +45,7 @@ def customer_delete_view(request, customer_id):
 
 #from django.contrib.auth.decorators import login_required
 
-#@login_required(redirect_field_name="{% url 'login' %}")
+@login_required(redirect_field_name="{% url 'login' %}")
 def golf_purchase_create_view(request):
     form = GolfPurchasesForm()
     if request.method == 'POST':
@@ -96,6 +98,7 @@ def golf_purchase_success_view(request,gp_id):
     form = GolfPurchasesForm(request.GET, instance=golfpurchase)
     return render(request, 'golfproapp/gp_success.html', {'form': form})
 
+@login_required(redirect_field_name="{% url 'login' %}")
 def misc_purchase_create_view(request):
     form = Misc_purchasesForm()
     if request.method == 'POST':
