@@ -40,8 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'golfproapp',
     'users',
-    'bootstrap_datepicker_plus',
-    
+        
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
